@@ -21,6 +21,9 @@ return function(Creator)
 		WindowShadow = "Black",
 		--WindowShadowTransparency = .7,
 
+		WindowTopbar = "Background",
+		WindowTopbarTransparency = 1,
+
 		WindowTopbarTitle = "Text",
 		WindowTopbarAuthor = "Text",
 		WindowTopbarIcon = "Icon",

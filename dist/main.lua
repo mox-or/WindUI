@@ -4,7 +4,7 @@
     | |/ |/ / / _ \/ _  / /_/ // /  
     |__/|__/_/_//_/\_,_/\____/___/
     
-    v1.6.66  |  2026-07-29  |  Roblox UI Library for scripts
+    v1.6.66  |  2026-08-15  |  Roblox UI Library for scripts
     
     To view the source code, see the `src/` folder on the official GitHub repository.
     
@@ -24746,6 +24746,9 @@ WindowBackground="Background",
 WindowShadow="Black",
 
 
+WindowTopbar="Background",
+WindowTopbarTransparency=1,
+
 WindowTopbarTitle="Text",
 WindowTopbarAuthor="Text",
 WindowTopbarIcon="Icon",
@@ -25084,6 +25087,13 @@ p.UpdateFont(p.Font)
 end
 
 function p.UpdateFont(r)
+if typeof(r)=="number"then
+r="rbxassetid://"..tostring(r)
+elseif typeof(r)=="Font"then
+r=r.Family
+elseif typeof(r)=="string"and tonumber(r)then
+r="rbxassetid://"..r
+end
 p.Font=r
 for u,v in next,p.FontObjects do
 v.FontFace=Font.new(r,v.FontFace.Weight,v.FontFace.Style)
@@ -26728,7 +26738,7 @@ return[[
         "dev": "bash build/build.sh dev $INPUT_FILE",
         "build": "bash build/build.sh build $INPUT_FILE",
         "live": "python3 -m http.server 8642",
-        "watch": "chokidar . -i 'node_modules' -i 'dist' -i 'build' -c 'npm run dev --'",
+        "watch": "chokidar . -i 'node_modules' -i 'dist' -i 'build' -c 'npm.cmd run build --'",
         "live-build": "concurrently \"npm run live\" \"npm run watch --\"",
         "example-live-build": "INPUT_FILE=main_example.lua npm run live-build",
         "updater": "python3 updater/main.py"
@@ -30009,6 +30019,7 @@ BackgroundTransparency=1,
 Text=aq or"",
 TextSize=ar=="Desc"and 15 or 17,
 TextXAlignment="Left",
+RichText=true,
 ThemeTag={
 TextColor3=not ah.Color and("Element"..ar)or nil,
 },
@@ -30024,7 +30035,7 @@ end
 local aq=CreateText(ah.Title,"Title")
 local ar=CreateText(ah.Desc,"Desc")
 if not ah.Title or ah.Title==""then
-ar.Visible=false
+aq.Visible=false
 end
 if not ah.Desc or ah.Desc==""then
 ar.Visible=false
@@ -37994,9 +38005,28 @@ g,
 ao("Frame",{
 Size=UDim2.new(1,0,0,aw.Topbar.Height),
 BackgroundTransparency=1,
-BackgroundColor3=Color3.fromRGB(50,50,50),
+ClipsDescendants=false,
 Name="Topbar",
+ThemeTag={
+BackgroundColor3="WindowTopbar",
+BackgroundTransparency="WindowTopbarTransparency",
+},
 },{
+ao("UICorner",{
+CornerRadius=UDim.new(0,aw.UICorner),
+}),
+ao("Frame",{
+Name="SquareBottom",
+Size=UDim2.new(1,0,0.5,0),
+Position=UDim2.new(0,0,0.5,0),
+BorderSizePixel=0,
+BackgroundTransparency=1,
+ThemeTag={
+BackgroundColor3="WindowTopbar",
+BackgroundTransparency="WindowTopbarTransparency",
+},
+ZIndex=0,
+}),
 f,
 
 

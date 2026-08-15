@@ -17,7 +17,11 @@ R='\033[0m'
 } > build/package.lua
 
 if [ "$MODE" = "dev" ]; then
-    INPUT=${2:-"./main.lua"}
+    if [ -z "$2" ] || [ "$2" = '$INPUT_FILE' ]; then
+        INPUT="./main.lua"
+    else
+        INPUT="$2"
+    fi
     PREFIX="${D}[ DEV ]${R}"
 else
     INPUT="src/Init.lua"

@@ -139,6 +139,7 @@ return function(Config)
 			Text = Title or "",
 			TextSize = Type == "Desc" and 15 or 17,
 			TextXAlignment = "Left",
+			RichText = true,
 			ThemeTag = {
 				TextColor3 = not Element.Color and ("Element" .. Type) or nil,
 			},
@@ -154,7 +155,7 @@ return function(Config)
 	local Title = CreateText(Element.Title, "Title")
 	local Desc = CreateText(Element.Desc, "Desc")
 	if not Element.Title or Element.Title == "" then
-		Desc.Visible = false
+		Title.Visible = false
 	end
 	if not Element.Desc or Element.Desc == "" then
 		Desc.Visible = false

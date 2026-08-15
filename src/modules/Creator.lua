@@ -228,6 +228,13 @@ function Creator.AddFontObject(Object)
 end
 
 function Creator.UpdateFont(FontId)
+	if typeof(FontId) == "number" then
+		FontId = "rbxassetid://" .. tostring(FontId)
+	elseif typeof(FontId) == "Font" then
+		FontId = FontId.Family
+	elseif typeof(FontId) == "string" and tonumber(FontId) then
+		FontId = "rbxassetid://" .. FontId
+	end
 	Creator.Font = FontId
 	for _, Obj in next, Creator.FontObjects do
 		Obj.FontFace = Font.new(FontId, Obj.FontFace.Weight, Obj.FontFace.Style)

@@ -764,9 +764,28 @@ return function(Config)
 			New("Frame", { -- Topbar
 				Size = UDim2.new(1, 0, 0, Window.Topbar.Height),
 				BackgroundTransparency = 1,
-				BackgroundColor3 = Color3.fromRGB(50, 50, 50),
+				ClipsDescendants = false,
 				Name = "Topbar",
+				ThemeTag = {
+					BackgroundColor3 = "WindowTopbar",
+					BackgroundTransparency = "WindowTopbarTransparency",
+				},
 			}, {
+				New("UICorner", {
+					CornerRadius = UDim.new(0, Window.UICorner),
+				}),
+				New("Frame", {
+					Name = "SquareBottom",
+					Size = UDim2.new(1, 0, 0.5, 0),
+					Position = UDim2.new(0, 0, 0.5, 0),
+					BorderSizePixel = 0,
+					BackgroundTransparency = 1,
+					ThemeTag = {
+						BackgroundColor3 = "WindowTopbar",
+						BackgroundTransparency = "WindowTopbarTransparency",
+					},
+					ZIndex = 0,
+				}),
 				Outline1,
 				--[[New("Frame", { -- Outline
                     Size = UDim2.new(1,Window.UIPadding*2, 0, 1),
